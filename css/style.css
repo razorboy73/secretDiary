@@ -1,0 +1,41 @@
+.container{
+    text-align: center;
+    width: 400px;
+    color:white;
+ 
+   
+    
+}
+#homePageContainer{
+    margin-top: 100px;
+}
+
+html{
+    background: url("../background-diary.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  body{
+      background:none;
+  }
+
+  #logInForm{
+      display: none;
+  }
+
+  .toggleForms a{
+      font-weight: bold;
+      
+  }
+
+  #diary{
+      width: 100%;
+      height: 100%;
+  }
+
+  #containerLoggedInPage{
+      margin-top: 50px;
+  }

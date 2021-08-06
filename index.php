@@ -7,11 +7,11 @@ if(!$link){
 }
 
 if (array_key_exists("logout", $_GET)){
-    unset($_SESSION);
+    session_unset();
     setcookie("id","",time()-(60*60));
     $_COOKIE['id'] = "";
 
-}else if (array_key_exists("id",$_SESSION) OR (array_key_exists("id", $_COOKIE))){
+}else if ((array_key_exists("id",$_SESSION) AND $_SESSION['id']) OR (array_key_exists("id", $_COOKIE) AND $_COOKIE['id'])){
     header("Location:loggedinpage.php");
 }
 
@@ -105,67 +105,55 @@ if(isset($_POST['userEmail']) && isset($_POST['userPassword'])){
 
 ?>
 
+<?php include("header.php") ?>
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
   <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div id="error"><?php echo $error.$success; ?></div>
-                <div id="success"></div>
-            </div>
-        </div>
-
-    </div>
     
-    </div>
-    <div class="container  mb-3">
+        
+     
+    <div class="container mb-3" id="homePageContainer">
+    
+        <h1>Secret Diary</h1>
+            
+                 <p><strong>Store your thoughts securely</strong></p>
+                <div id="error"><?php echo $error.$success; ?></div>
+               
+           
+       
         <div class="row">
-            <div class="col-lg-12 col-md-12">
-            <form method="POST">
+            
+            <form method="POST" id="signUpForm">
+                <p>Interested?  Sign Up Now?</p>
                 <div class="mb-3">
-                    <label for="userEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="usernameHelp">
+                    
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="usernameHelp" placeholder="Your Email">
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="userPassword" class="form-label">Password</label>
-                    <input type="password" name="userPassword" class="form-control" id="userPassword">
+                    
+                    <input type="password" name="userPassword" class="form-control" id="userPassword" placeholder="Password">
                 </div>
                 <div class="mb-3 form-check">
                     <input type="hidden" name="signUp" value="1">
                     <input type="checkbox" name="stayLoggedIn" value="1"  class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" name="checkboxLogin" for="exampleCheck1">Stay Logged in</label>
                 </div>
-                <button type="submit" name="submit" value="Submit!" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" value="Submit!" class="btn btn-success">Submit</button>
+                <p><a href="#" class="toggleForms">Log In Bitches</a></p>
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-            <form method="POST">
+            
+      
+           
+            <form method="POST" id="logInForm">
+            <p>Have an account?  Sign in!</p>
                 <div class="mb-3">
-                    <label for="userEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="usernameHelp">
+                    
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="usernameHelp" placeholder="Your Email">
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="userPassword" class="form-label">Password</label>
-                    <input type="password" name="userPassword" class="form-control" id="userPassword">
+                   
+                    <input type="password" name="userPassword" class="form-control" id="userPassword" placeholder="Password">
                 </div>
                 <div class="mb-3 form-check">
                     <input type="hidden" name="signUp" value="0">
@@ -173,20 +161,10 @@ if(isset($_POST['userEmail']) && isset($_POST['userPassword'])){
                     <label class="form-check-label" name="checkboxLogin" for="exampleCheck1">Stay Logged in</label>
                 </div>
                 <button type="submit" name="submit" value="LogIn" class="btn btn-primary">Log In</button>
-                </form>
-            </div>
+                <p><a href="#" class="toggleForms">Sign Up Bitches</a></p>
+            </form>
+            
         </div>
     </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-  </body>
-</html>
+    <?php include("footer.php") ?>
